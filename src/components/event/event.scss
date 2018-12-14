@@ -1,0 +1,12 @@
+event {
+    display:block;
+    .eventWrapper{
+        display: flex;flex: 1;flex-direction: row;
+        .eventSection.sectionLeft{width:20%;}
+        .eventSection.sectionRight{width:70%;padding: 10px 0 10px 20px;;}
+        .eventSection.sectionRightMost{width:10%;display: flex;align-items: center;justify-content: center;}
+        .eventName,.description{text-align: left;}
+    }
+    .mat-button{border:1px solid #bbb;border-radius:5px;padding:0px;margin:5px 10px;line-height:normal;}
+    .mat-button-focus-overlay{background:transparent;}
+}

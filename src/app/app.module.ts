@@ -5,10 +5,15 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MyApp } from './app.component';
+import { MenuComponent } from '../components/menu/menu';
+import { AddEventPage } from '../pages/add-event/add-event';
+
 
 @NgModule({
   declarations: [
-    MyApp
+    MyApp,
+    MenuComponent,
+    AddEventPage,
   ],
   imports: [
     BrowserModule,
@@ -17,7 +22,8 @@ import { MyApp } from './app.component';
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp
+    MyApp,
+    AddEventPage,
   ],
   providers: [
     StatusBar,
