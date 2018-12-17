@@ -1,7 +1,10 @@
-import { Component, ViewChild  } from '@angular/core';
+import { Component  } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
-import { AddEventPage } from '../add-event/add-event';
+import { EventListItem } from '../../models/event-list-item.interface'
+import { AngularFireDatabase, AngularFireList  } from 'angularfire2/database';
+import { Observable } from 'rxjs-compat';
 
+import { AddEventPage } from '../add-event/add-event';
 
 @IonicPage()
 @Component({
@@ -10,15 +13,20 @@ import { AddEventPage } from '../add-event/add-event';
 })
 
 export class HomePage {
-  private eventsList;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController) {
-    this.eventsList= [{Name:"COFFEE",color:"#f3bd75",font:"sb-bistro-coffee"},
-    {Name:"CAKES",color:"#f17fa0",font:"sb-bistro-cake"},
-    {Name:"BURGERS",color:"#6de4e5",font:"sb-bistro-burger"},
-    {Name:"CHICKEN",color:"#b3e071",font:"sb-bistro-chicken"},
-    {Name:"DESERT",color:"#9E9E9E",font:"sb-bistro-dessert"},
-    {Name:"DRINKS",color:"rgba(255, 87, 34, 0.89)",font:"sb-bistro-drinks"},
-    {Name:"ICE CREAMS",color:"rgba(255, 193, 7, 0.7)",font:"sb-bistro-icecream"}];
+
+  private dataKey;
+  eventListRef$: AngularFireList<EventListItem[]>;
+
+  constructor(
+  public navCtrl: NavController, 
+  public navParams: NavParams,
+  public menuCtrl: MenuController,
+  private database: AngularFireDatabase) {
+    this.eventListRef$ = this.database.list('events-list').valueChanges();
+
+    //this.eventListRef$.valueChanges().subscribe(x => console.log(x))
+
+    console.log(this.eventListRef$);
   
   }
 
@@ -31,7 +39,7 @@ export class HomePage {
   }
 
   openAddEvent(){
-    this.navCtrl.push(AddEventPage);
+    this.dataKey = this.navCtrl.push(AddEventPage)
   }
 
 

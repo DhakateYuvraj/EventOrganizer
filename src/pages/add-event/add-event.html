@@ -4,13 +4,16 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <form (ngSubmit)="logForm()">
+  <form (ngSubmit)="addEvent()">
     <ion-item>
       <ion-label floating >Name</ion-label>
-      <ion-input type="text" [(ngModel)]="event.name" name="name"></ion-input>
+      <ion-input type="text" [(ngModel)]="eventListItem.eventName" name="eventName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating >Description</ion-label>
+      <ion-input type="text" [(ngModel)]="eventListItem.eventDesc" name="eventDesc"></ion-input>
     </ion-item>
     <button ion-button type="submit" block>Add New Event</button>
   </form>
-
 
 </ion-content>

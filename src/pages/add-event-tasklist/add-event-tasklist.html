@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Add Task</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <h2>{{eventName}}</h2>
+  <form (ngSubmit)="addEventTask()">
+      <ion-item>
+        <ion-label floating >Name</ion-label>
+        <ion-input type="text" [(ngModel)]="taskItem.taskName" name="Name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating >Severity</ion-label>
+        <ion-input type="text" [(ngModel)]="taskItem.severity" name="Severity"></ion-input>
+      </ion-item>
+      <button ion-button type="submit" block>Add Task</button>
+    </form>
+    
+    <div *ngFor="let task of tasks">
+        {{task.taskName}}
+      </div>
+</ion-content>
