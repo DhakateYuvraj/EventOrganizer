@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
+
 import { TaskItem } from '../../models/event-task-item.interface';
 import { AngularFireDatabase, AngularFireList  } from 'angularfire2/database';
 
@@ -41,13 +42,17 @@ export class AddEventTasklistPage {
     });
   }
 
-  addItem(item){
+  addItem(){
     let item = {
       eventId:this.eventId,
       tasks:[this.taskItem]
 
     }
     this.taskItemRef$.push(item);
+  }
+
+  updateItem(item){
+    this.taskItemRef$.update(item);
   }
 
 
@@ -58,9 +63,16 @@ export class AddEventTasklistPage {
   addEventTask(){
     this.getCurrentTask(this.eventId, (currentEventTask, t) => {
       if(currentEventTask && currentEventTask.eventId == this.eventId ){
-        console.log('add in old')
+
+        console.log(currentEventTask.$key)
+        let x = this.database.object(`events-task-list/${currentEventTask.$key}`);
+        console.log(x);
+        currentEventTask.tasks.push(this.taskItem);
+        console.log(currentEventTask);
+        //this.taskItemRef$.update(currentEventTask)
+        //this.updateItem(currentEventTask)
       }else{
-        this.addItem()
+        this.addItem();
       }
     })
     // if(this.currentEventTask && this.currentEventTask.eventId){
